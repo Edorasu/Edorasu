@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\edras\\OneDrive\\Escritorio\\TodoHonduras\\TodoHonduras\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{02836CE7-C204-41B1-9F75-5BAC8C2FA985}|CapaPresentacionAdmin\\CapaPresentacionAdmin.csproj|c:\\users\\edras\\onedrive\\escritorio\\todohonduras\\todohonduras\\capapresentacionadmin\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02836CE7-C204-41B1-9F75-5BAC8C2FA985}|CapaPresentacionAdmin\\CapaPresentacionAdmin.csproj|solutionrelative:capapresentacionadmin\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -23,19 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BundleConfig.cs",
-              "DocumentMoniker": "C:\\Users\\edras\\OneDrive\\Escritorio\\TodoHonduras\\TodoHonduras\\CapaPresentacionAdmin\\App_Start\\BundleConfig.cs",
-              "RelativeDocumentMoniker": "CapaPresentacionAdmin\\App_Start\\BundleConfig.cs",
-              "ToolTip": "C:\\Users\\edras\\OneDrive\\Escritorio\\TodoHonduras\\TodoHonduras\\CapaPresentacionAdmin\\App_Start\\BundleConfig.cs",
-              "RelativeToolTip": "CapaPresentacionAdmin\\App_Start\\BundleConfig.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwCEAAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T03:55:14.99Z",
-              "EditorCaption": ""
             }
           ]
         }

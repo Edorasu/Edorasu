@@ -56,3 +56,4 @@ insert into ALDEA (IdAldea,Descripcion,IdMunicipio,IdDepartamento) values
 ('030201','	Ajuterique','0302','03'),
 ('030202','		El Misterio','0302','03')
 go
+

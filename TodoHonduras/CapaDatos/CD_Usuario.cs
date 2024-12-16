@@ -142,5 +142,74 @@ namespace CapaDatos
             }
             return resultado;
         }
+
+        public bool CambiarClave(int idusuario, string nuevaclave, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("update USUARIO set clave = @nuevaclave, Reestablecer = 0 where IdUsuario = @id", oconexion);
+                    cmd.Parameters.AddWithValue("@id", idusuario);
+                    cmd.Parameters.AddWithValue("@nuevaclave", nuevaclave);
+                    cmd.CommandType = CommandType.Text;
+                    oconexion.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
+        }
+
+        public bool ReestablecerClave(int idusuario, string clave, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("update usuario set clave = @clave, Reestablecer = 1 where idusuario = @id", oconexion);
+                    cmd.Parameters.AddWithValue("@id", idusuario);
+                    cmd.Parameters.AddWithValue("@clave", clave);
+                    cmd.CommandType = CommandType.Text;
+                    oconexion.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
+        }
+
+        public string ObtenerClave(int idusuario)
+        {
+            string clave = string.Empty;
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT clave FROM usuario WHERE idusuario = @idusuario", oconexion);
+                    cmd.Parameters.AddWithValue("@idusuario", idusuario);
+                    oconexion.Open();
+                    clave = cmd.ExecuteScalar().ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la clave del usuario: " + ex.Message);
+            }
+            return clave;
+        }
+
     }
 }

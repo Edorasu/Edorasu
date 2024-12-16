@@ -55,7 +55,7 @@
             </div>
             <div class="modal-body">
 
-                <input id="txtid" type="text" value="0" />
+                <input id="txtid" type="hidden" value="0" />
 
                 @*fila*@
                 <div class="row g-2">
@@ -254,7 +254,7 @@
 
 
             jQuery.ajax({
-                url: '@Url.Action("GuardarUsuario", "Home")',
+                url: '@Url.Action("GuardarUsuarios", "Home")',
                 type: "POST",
                 data: JSON.stringify({ objeto: Usuario }),
                 dataType: "json",
@@ -263,7 +263,7 @@
 
                     $(".modal-body").LoadingOverlay("hide")
 
-                    //NUEVO
+                    //USUARIO NUEVO
                     if (Usuario.IdUsuario == 0) {
 
                         if (data.resultado != 0) {
@@ -278,7 +278,7 @@
                         }
                     }
 
-                    //EDITAR
+                    //USUARIO EDITAR
                     else
                     {
                         if (data.resultado)
@@ -311,5 +311,6 @@
             });
         }
     </script>
+
 
 }

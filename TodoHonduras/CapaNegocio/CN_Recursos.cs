@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Claims;
 
 namespace CapaNegocio
 {
@@ -17,8 +18,6 @@ namespace CapaNegocio
             string clave = Guid.NewGuid().ToString("N").Substring(0, 6);
             return clave;
         }
-
-
 
         //Encriptacion de text a SHA256
         public static string ConvertirSha256(string texto)
@@ -53,7 +52,8 @@ namespace CapaNegocio
 
                 var smtp = new SmtpClient()
                 {
-                    Credentials = new NetworkCredential("edrasalvarezoliva@gmail.com", "hvlwerjsqcxvndzw"),
+                    //clave pruebas2 wzhydxbewmqjlbf
+                    Credentials = new NetworkCredential("edrasalvarezoliva@gmail.com", "qsfdzejorbjcniuh"),
                     Host = "smtp.gmail.com",
                     Port = 587,
                     EnableSsl = true,
@@ -68,7 +68,7 @@ namespace CapaNegocio
             }
             return resultado;
         }
-
+        
         public static string ConvertirBase64(string ruta, out bool conversion)
         {
             string textoBase64 = string.Empty;
@@ -86,5 +86,7 @@ namespace CapaNegocio
 
             return textoBase64;
         }
+
+
     }
 }

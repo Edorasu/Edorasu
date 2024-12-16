@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -105,5 +106,64 @@ namespace CapaNegocio
         {
             return objCapaDato.Eliminar(id, out Mensaje);
         }
+
+        public bool CambiarClave(int idusuario, string nuevaclave, out string Mensaje)
+        {
+            return objCapaDato.CambiarClave(idusuario,nuevaclave, out Mensaje);
+        }
+
+        public bool ReestablecerClave(int idusuario, string correo, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+            string nuevaclave = CN_Recursos.GenerarClave();
+            string claveAnterior = string.Empty;
+
+            try
+            {
+                // Obtener la clave anterior antes de modificarla
+                claveAnterior = objCapaDato.ObtenerClave(idusuario); // Asegúrate de tener un método que recupere la clave anterior
+
+                // Actualizar la clave en la base de datos
+                bool resultado = objCapaDato.ReestablecerClave(idusuario, CN_Recursos.ConvertirSha256(nuevaclave), out Mensaje);
+
+                if (resultado)
+                {
+                    string asunto = "Contraseña Reestablecida";
+                    string mensaje_correo = "<h3>Su cuenta fue reestablecida correctamente</h3></br><p>Su contraseña para acceder ahora es: !clave!</p>";
+                    mensaje_correo = mensaje_correo.Replace("!clave!", nuevaclave);
+
+                    // Intentar enviar el correo
+                    bool respuesta = CN_Recursos.EnviarCorreo(correo, asunto, mensaje_correo);
+
+                    if (respuesta)
+                    {
+                        return true; // Si el correo se envía, todo está correcto
+                    }
+                    else
+                    {
+                        // Si no se pudo enviar el correo, restaurar la clave
+                        objCapaDato.ReestablecerClave(idusuario, claveAnterior, out Mensaje); // Restaurar la clave anterior
+                        Mensaje = "No se pudo enviar el correo, la clave ha sido restaurada a su valor anterior";
+                        return false;
+                    }
+                }
+                else
+                {
+                    Mensaje = "No se pudo reestablecer la contraseña";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // En caso de excepciones, restaurar la clave y manejar el error
+                if (!string.IsNullOrEmpty(claveAnterior))
+                {
+                    objCapaDato.ReestablecerClave(idusuario, claveAnterior, out Mensaje); // Restaurar la clave
+                }
+                Mensaje = "Hubo un error al procesar la solicitud: " + ex.Message;
+                return false;
+            }
+        }
+
     }
 }
