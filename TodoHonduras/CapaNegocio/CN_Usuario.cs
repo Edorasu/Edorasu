@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using CapaDatos;
+﻿using CapaDatos;
 using CapaEntidad;
+using System;
+using System.Collections.Generic;
 
 namespace CapaNegocio
 {
@@ -109,7 +104,7 @@ namespace CapaNegocio
 
         public bool CambiarClave(int idusuario, string nuevaclave, out string Mensaje)
         {
-            return objCapaDato.CambiarClave(idusuario,nuevaclave, out Mensaje);
+            return objCapaDato.CambiarClave(idusuario, nuevaclave, out Mensaje);
         }
 
         public bool ReestablecerClave(int idusuario, string correo, out string Mensaje)

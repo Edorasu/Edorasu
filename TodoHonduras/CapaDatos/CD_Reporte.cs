@@ -1,11 +1,8 @@
 ﻿using CapaEntidad;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Globalization;
 
 namespace CapaDatos
@@ -74,7 +71,7 @@ namespace CapaDatos
                         while (dr.Read())
                         {
                             objeto = new DashBoard()
-                                {
+                            {
                                 TotalCliente = Convert.ToInt32(dr["TotalCliente"]),
                                 TotalVenta = Convert.ToInt32(dr["TotalVenta"]),
                                 TotalProducto = Convert.ToInt32(dr["TotalProducto"])

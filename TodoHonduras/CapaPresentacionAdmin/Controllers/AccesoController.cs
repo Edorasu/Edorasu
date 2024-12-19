@@ -1,10 +1,6 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
-using DocumentFormat.OpenXml.Bibliography;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 using System.Web.Security;
@@ -71,8 +67,9 @@ namespace CapaPresentacionAdmin.Controllers
                 ViewBag.Error = "La contraseña actual no es correcta";
                 return View();
 
-            } 
-            else if (nuevaclave != confirmarclave) {
+            }
+            else if (nuevaclave != confirmarclave)
+            {
                 TempData["IdUsuario"] = idusuario;
                 ViewData["vclave"] = claveactual;
                 ViewBag.Error = "Las contraseñas no coinciden";
@@ -87,7 +84,7 @@ namespace CapaPresentacionAdmin.Controllers
 
             if (respuesta)
             {
-                return RedirectToAction("Index","Acceso");
+                return RedirectToAction("Index", "Acceso");
             }
             else
             {
@@ -100,11 +97,11 @@ namespace CapaPresentacionAdmin.Controllers
         [HttpPost]
         public ActionResult Reestablecer(string correo)
         {
-            Usuario ousuario  = new Usuario();
+            Usuario ousuario = new Usuario();
 
             ousuario = new CN_Usuario().Listar().Where(item => item.Correo == correo).FirstOrDefault();
 
-            if(ousuario == null)
+            if (ousuario == null)
             {
                 ViewBag.Error = "No se encontro un usuario relacionado a ese correo";
                 return View();

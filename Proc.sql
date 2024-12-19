@@ -267,14 +267,14 @@ begin
 end
 go
 
-select p.IdProducto, p.Nombre, p.Descripcion,
-m.IdMarca, m.Descripcion[DesMarca],
-c.IdCategoria, c.Descripcion[DesCategoria],
-p.Precio, p.Stock, p.RutaImagen, p.NombreImagen, p.Activo
-from PRODUCTO p
-inner join MARCA m on m.IdMarca = p.IdMarca
-inner join CATEGORIA c on c.IdCategoria = p.IdCategoria
-go
+--select p.IdProducto, p.Nombre, p.Descripcion,
+--m.IdMarca, m.Descripcion[DesMarca],
+--c.IdCategoria, c.Descripcion[DesCategoria],
+--p.Precio, p.Stock, p.RutaImagen, p.NombreImagen, p.Activo
+--from PRODUCTO p
+--inner join MARCA m on m.IdMarca = p.IdMarca
+--inner join CATEGORIA c on c.IdCategoria = p.IdCategoria
+--go
 
 CREATE PROC sp_ReporteDashBoard
 as
@@ -307,6 +307,7 @@ end
 GO
 
 --PARTE DEL LADO DEL CLIENTE
+
 Create proc sp_RegistrarCliente(
 @Nombres varchar(100),
 @Apellidos varchar(100),
@@ -410,3 +411,58 @@ begin
 end
 go
 
+
+create function fn_obtenerCarritoCliente(
+@idcliente int
+)
+returns table
+as
+return(
+	SELECT 
+        p.IdProducto, 
+        m.Descripcion [DesMarca], 
+        p.Nombre, p.Precio, 
+        c.Cantidad, 
+        p.RutaImagen, p.NombreImagen
+    FROM 
+        CARRITO c
+    INNER JOIN 
+        PRODUCTO p ON p.IdProducto = c.IdProducto
+    INNER JOIN 
+        MARCA m ON m.IdMarca = p.IdMarca
+    WHERE c.IdCliente = @idcliente
+)
+go
+
+
+Create proc sp_EliminarCarrito(
+@IdCliente int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+	
+	set @Resultado = 1
+	declare @cantidadproducto int = (select Cantidad from CARRITO where IdCliente = @IdCliente and IdProducto = @IdProducto)
+
+	begin try
+		
+		begin transaction OPERACION
+
+		update PRODUCTO set Stock = Stock + @cantidadproducto where IdProducto = @IdProducto
+		delete top (1) from CARRITO where IdCliente = @IdCliente and IdProducto = @IdProducto
+
+		commit transaction OPERACION
+
+	END TRY
+	BEGIN CATCH
+		set @Resultado = 0
+		ROLLBACK TRANSACTION OPERACION
+	END CATCH
+end
+go
+
+--Select * from CLIENTE
+--Select * from Municipio where IdDepartamento = @iddepartamento
+--Select * from Aldea where IdMunicipio = @idmunicipio and IdDepartamento = @iddepartamento

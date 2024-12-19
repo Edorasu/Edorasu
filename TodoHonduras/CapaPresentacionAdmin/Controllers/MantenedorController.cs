@@ -42,7 +42,7 @@ namespace CapaPresentacionAdmin.Controllers
             }
             else
             {
-                resultado = new CN_Categoria    ().Editar(objeto, out mensaje);
+                resultado = new CN_Categoria().Editar(objeto, out mensaje);
             }
             return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
@@ -127,7 +127,7 @@ namespace CapaPresentacionAdmin.Controllers
             string mensaje = string.Empty;
             bool operacion_exitosa = true;
             bool guardar_imagen_exito = true;
-             
+
             Producto oProducto = new Producto();
             oProducto = JsonConvert.DeserializeObject<Producto>(objeto);
 

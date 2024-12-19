@@ -2,9 +2,6 @@
 using CapaEntidad;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
@@ -27,9 +24,11 @@ namespace CapaNegocio
 
             if (string.IsNullOrEmpty(Mensaje))
             {
-                    return objCapaDato.Registrar(obj, out Mensaje);
+                return objCapaDato.Registrar(obj, out Mensaje);
 
-            } else {
+            }
+            else
+            {
                 return 0;
             }
         }

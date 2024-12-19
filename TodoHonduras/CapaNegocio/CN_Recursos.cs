@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
+using System.IO;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Security.Claims;
 
 namespace CapaNegocio
 {
@@ -68,7 +64,7 @@ namespace CapaNegocio
             }
             return resultado;
         }
-        
+
         public static string ConvertirBase64(string ruta, out bool conversion)
         {
             string textoBase64 = string.Empty;

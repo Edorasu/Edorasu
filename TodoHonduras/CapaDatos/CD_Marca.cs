@@ -1,13 +1,9 @@
 ﻿using CapaEntidad;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
+using System.Data.SqlClient;
 using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace CapaDatos
 {
@@ -162,7 +158,7 @@ namespace CapaDatos
 
 
                     SqlCommand cmd = new SqlCommand(sb.ToString(), oconexion);
-                    cmd.Parameters.AddWithValue("@idcategoria",idcategoria);
+                    cmd.Parameters.AddWithValue("@idcategoria", idcategoria);
                     cmd.CommandType = CommandType.Text;
 
                     oconexion.Open();

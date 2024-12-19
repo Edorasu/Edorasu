@@ -1,9 +1,6 @@
 ﻿using CapaDatos;
-using System;
+using CapaEntidad;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
@@ -24,6 +21,16 @@ namespace CapaNegocio
         public int CantidadEnCarrito(int idcliente)
         {
             return objCapaDato.CantidadEnCarrito(idcliente);
+        }
+
+        public List<Carrito> ListarProducto(int idcliente)
+        {
+            return objCapaDato.ListarProducto(idcliente);
+        }
+
+        public bool EliminarCarrito(int idcliente, int idproducto)
+        {
+            return objCapaDato.EliminarCarrito(idcliente, idproducto);
         }
     }
 }

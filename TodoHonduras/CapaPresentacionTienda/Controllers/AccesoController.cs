@@ -1,10 +1,6 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -44,7 +40,7 @@ namespace CapaPresentacionTienda.Controllers
             ViewData["Apellidos"] = string.IsNullOrEmpty(objeto.Apellidos) ? "" : objeto.Apellidos;
             ViewData["Correo"] = string.IsNullOrEmpty(objeto.Correo) ? "" : objeto.Correo;
 
-            if(objeto.Clave != objeto.ConfirmarClave)
+            if (objeto.Clave != objeto.ConfirmarClave)
             {
                 ViewBag.Error = "La contraseñas no coiciden";
                 return View();
@@ -52,7 +48,7 @@ namespace CapaPresentacionTienda.Controllers
 
             resultado = new CN_Cliente().Registrar(objeto, out mensaje);
 
-            if(resultado > 0 )
+            if (resultado > 0)
             {
                 ViewBag.Error = null;
                 return RedirectToAction("index", "Acceso");

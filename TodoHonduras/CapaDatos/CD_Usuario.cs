@@ -1,11 +1,8 @@
-﻿using System;
+﻿using CapaEntidad;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CapaEntidad;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace CapaDatos
 {
@@ -31,15 +28,16 @@ namespace CapaDatos
                         while (dr.Read())
                         {
                             lista.Add(
-                                new Usuario{
-                                IdUsuario = Convert.ToInt32(dr["IdUsuario"]),
-                                Nombres = dr["Nombres"].ToString(),
-                                Apellidos = dr["Apellidos"].ToString(),
-                                Correo = dr["Correo"].ToString(),
-                                Clave = dr["Clave"].ToString(),
-                                Reestablecer = Convert.ToBoolean(dr["Reestablecer"]),
-                                Activo = Convert.ToBoolean(dr["Activo"])
-                            });
+                                new Usuario
+                                {
+                                    IdUsuario = Convert.ToInt32(dr["IdUsuario"]),
+                                    Nombres = dr["Nombres"].ToString(),
+                                    Apellidos = dr["Apellidos"].ToString(),
+                                    Correo = dr["Correo"].ToString(),
+                                    Clave = dr["Clave"].ToString(),
+                                    Reestablecer = Convert.ToBoolean(dr["Reestablecer"]),
+                                    Activo = Convert.ToBoolean(dr["Activo"])
+                                });
                         }
                     }
                 }

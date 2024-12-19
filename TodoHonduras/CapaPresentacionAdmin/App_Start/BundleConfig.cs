@@ -1,6 +1,4 @@
-﻿    using System.Web;
-using System.Web.Optimization;
-using System.Web.UI.WebControls;
+﻿using System.Web.Optimization;
 
 namespace CapaPresentacionAdmin
 {
@@ -32,7 +30,7 @@ namespace CapaPresentacionAdmin
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.js"));
-            
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
                 "~/Content/DataTables/css/jquery.dataTables.css",

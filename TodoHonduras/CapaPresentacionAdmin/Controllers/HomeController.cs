@@ -1,15 +1,12 @@
-﻿    using System;
-using System.Collections;
+﻿using CapaEntidad;
+using CapaNegocio;
+using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using CapaEntidad;
-using CapaNegocio;
 using System.Globalization;
-using ClosedXML.Excel;
 using System.IO;
+using System.Web.Mvc;
 
 namespace CapaPresentacionAdmin.Controllers
 {
@@ -30,7 +27,7 @@ namespace CapaPresentacionAdmin.Controllers
         }
 
         [HttpGet]
-        public JsonResult ListaReporte( string fechainicio, string fechafin, string idtransaccion)
+        public JsonResult ListaReporte(string fechainicio, string fechafin, string idtransaccion)
         {
 
             List<Reporte> oLista = new List<Reporte>();
