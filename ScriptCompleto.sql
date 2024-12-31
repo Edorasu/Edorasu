@@ -1,4 +1,217 @@
---PROC ALMACENADOS
+-- TODO SCRIPT
+CREATE DATABASE TodoHonduras
+GO
+
+use TodoHonduras
+go
+
+CREATE TABLE CATEGORIA(
+IdCategoria int primary key identity,
+Descripcion varchar (100),
+Activo bit default 1,
+FechaRegistro datetime default getdate()
+)
+GO
+
+CREATE TABLE MARCA(
+IdMarca int primary key identity,
+Descripcion varchar (100),
+Activo bit default 1,
+FechaRegistro datetime default getdate()
+)
+GO
+
+CREATE TABLE PRODUCTO(
+IdProducto int primary key identity,
+Nombre varchar (500),
+Descripcion varchar (100),
+IdMarca int references MARCA(IdMarca),
+IdCategoria int references CATEGORIA(IdCategoria),
+--PrecioCompra decimal(10,2) NOT NULL DEFAULT 0,
+Precio decimal(10,2) default 0,
+Stock int,
+RutaImagen varchar(500),
+NombreImagen varchar(100),
+Activo bit default 1,
+FechaRegistro datetime default getdate()
+)
+GO
+
+
+
+CREATE TABLE CLIENTE(
+IdCliente int primary key identity,
+Nombres varchar (100),
+Apellidos varchar (100),
+Correo varchar (100),
+Clave varchar (150),
+Reestablecer bit default 0,
+FechaRegistro datetime default getdate()
+)
+GO
+
+CREATE TABLE CARRITO(
+IdCarrito int primary key identity,
+IdCliente int references CLIENTE(IdCliente),
+IdProducto int references PRODUCTO(IdProducto),
+Cantidad int
+)
+GO
+
+CREATE TABLE Venta(
+IdVenta int primary key identity,
+IdCliente int references CLIENTE(IdCliente),
+TotalProducto int,
+MontoTotal decimal(10,2),
+Contacto varchar (50),
+IdAldea varchar (50),
+Telefono varchar (50),
+Direccion varchar (500),
+IdTransaccion varchar (50),
+FechaVenta datetime default getdate()
+)
+GO
+
+CREATE TABLE Detalle_Venta(
+IdDetalleVenta int primary key identity,
+IdVenta int references VENTA (IdVenta),
+IdProducto int references PRODUCTO (IdProducto),
+--PrecioCompra decimal(10,2) NOT NULL DEFAULT 0,
+Cantidad int,
+Total decimal(10,2)
+)
+GO
+
+CREATE TABLE USUARIO(
+IdUsuario int primary key identity,
+Nombres varchar (100),
+Apellidos varchar (100),
+Correo varchar (100),
+Clave varchar (150),
+Reestablecer bit default 1,
+Activo bit default 1,
+FechaRegistro datetime default getdate()
+)
+GO
+
+CREATE TABLE DEPARTAMENTO(
+IdDepto INT PRIMARY KEY IDENTITY,
+IdDepartamento varchar (2) not null,
+Descripcion varchar (45) not null
+)
+GO
+
+CREATE TABLE MUNICIPIO(
+IdMun INT PRIMARY KEY IDENTITY,
+IdMunicipio varchar (4) NOT NULL,
+Descripcion varchar (45) NOT NULL,
+IdDepartamento varchar (2) NOT NULL
+)
+GO
+
+CREATE TABLE ALDEA(
+IdDistrito INT PRIMARY KEY IDENTITY,
+IdAldea varchar (6) NOT NULL,
+Descripcion varchar (45) NOT NULL,
+IdMunicipio varchar (4) NOT NULL,
+IdDepartamento varchar (2) NOT NULL
+)
+GO
+
+CREATE TYPE [dbo].[EDetalle_Venta] AS TABLE(
+	[IdProducto] int null,
+	[Cantidad] int null,
+	[Total] decimal(18,2) null
+)
+GO
+
+
+CREATE TABLE Negocio(
+IdNegocio int primary key,
+Documento varchar (100),
+RazonSocial varchar (100),
+Correo varchar (100),
+Direccion varchar (500),
+Telefono varchar (100),
+UserTelegram varchar (100),
+Mision varchar (1000),
+Vision varchar (1000),
+RutaImagen varchar(700),
+NombreImagen varchar(100)
+)
+GO
+
+-- INSERCION DE DATOS A LAS TABLAS
+
+Insert into USUARIO (Nombres, Apellidos, Correo, Clave) values
+('NombreEjemplo','ApellidosEjemplo', 'correo@example.com', 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae')
+go
+
+Insert into CATEGORIA (Descripcion) values
+('Tecnología')
+go
+
+Insert into MARCA (Descripcion) values
+('LG')
+go
+
+Insert into DEPARTAMENTO (IdDepartamento,Descripcion) VALUES
+('01','Atlantida'),
+('02','Colón'),
+('03','Comayagua'),
+('04','Copán'),
+('05','Cortes'),
+('06','Choluteca'),
+('07','El Paraíso'),
+('08','Francisco Morazan')
+GO
+
+Insert into MUNICIPIO (IdMunicipio,Descripcion,IdDepartamento) values
+--Atlantidad
+('0101','La Ceiba','01'),
+('0102','El Porvenir','01'),
+
+--COLÓN
+('0201','Trujillo','02'),
+('0202','Balfate','02'),
+
+--COMAYAGUA
+('0301','Comayagua','03'),
+('0302','Ajuterique','03')
+
+go
+
+insert into ALDEA (IdAldea,Descripcion,IdMunicipio,IdDepartamento) values
+--LA CEIBA - MUN
+('010101','Corozal','0101','01'),
+('010102','El Paraíso o Bataca','0101','01'),
+
+--EL PORVENIR - MUN
+('010201','El Pino','0102','01'),
+('010202','La Ruidosa','0102','01'),
+
+--TRUJILLO - MUN
+('020101','Chapagua','0201','02'),
+('020102','Colonia Aguán','0201','02'),
+
+--BALFATE - MUN
+('020201','Balfate','0202','02'),
+('020202','	Arenalosa','0202','02'),
+
+--Comayagua - MUN
+('030101','El Guachipilín','0301','03'),
+('030102','El Horno','0301','03'),
+
+--AJUTERIQUE - MUN
+('030201','	Ajuterique','0302','03'),
+('030202','		El Misterio','0302','03')
+go
+
+Insert into Negocio (IdNegocio,Documento,RazonSocial,Correo,Direccion, Telefono,UserTelegram,Mision,Vision,RutaImagen,NombreImagen) values 
+(1,'101010','TestDocument','@test','direccionTest','959595','UserTeleg','TestMision','TestVision',null,null)
+go
+
+-- PROCEDIMIENTOS ALMACENADOS
 
 Create proc sp_RegistrarUsuario(
     @Nombres varchar(100),
@@ -279,14 +492,6 @@ begin
 end
 go
 
---select p.IdProducto, p.Nombre, p.Descripcion,
---m.IdMarca, m.Descripcion[DesMarca],
---c.IdCategoria, c.Descripcion[DesCategoria],
---p.Precio, p.Stock, p.RutaImagen, p.NombreImagen, p.Activo
---from PRODUCTO p
---inner join MARCA m on m.IdMarca = p.IdMarca
---inner join CATEGORIA c on c.IdCategoria = p.IdCategoria
---go
 
 Create proc sp_ReporteDashBoard
 as
@@ -343,17 +548,6 @@ begin
 end
 go
 
---SELECT * FROM CLIENTE
---Contrase;a = 123
---update cliente set Clave = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', Reestablecer = 0 where IdCliente = 1
-
---declare @idcategoria int = 0
-
---Select distinct m.IdMarca, m.Descripcion from PRODUCTO p
---INNER JOIN CATEGORIA c on c.IdCategoria = p.IdCategoria
---INNER JOIN MARCA m on m.IdMarca = p.IdMarca and m.Activo = 1
---where c.IdCategoria = iif(@idcategoria = 0, c.IdCategoria, @idcategoria)
---GO
 
 Create proc sp_ExisteCarrito(
 @IdCliente int,
@@ -899,11 +1093,3 @@ BEGIN
     SET @Resultado = 1;  -- Indica que la actualización fue exitosa
 END
 GO
-
---Select IdNegocio,Documento,RazonSocial,Correo,Direccion,
---Telefono,UserTelegram,Mision,Vision,RutaImagen,NombreImagen from Negocio
-
---Insert into Negocio (IdNegocio,Documento,RazonSocial,Correo,Direccion,
---Telefono,UserTelegram,Mision,Vision,RutaImagen,NombreImagen) values 
---(1,'101010','TestDocument','@test','direccionTest','959595','UserTeleg','TestMision','TestVision',null,null)
-

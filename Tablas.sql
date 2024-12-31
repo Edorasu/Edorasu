@@ -28,12 +28,14 @@ IdMarca int references MARCA(IdMarca),
 IdCategoria int references CATEGORIA(IdCategoria),
 Precio decimal(10,2) default 0,
 Stock int,
-RutaImagen varchar(100),
+RutaImagen varchar(500),
 NombreImagen varchar(100),
 Activo bit default 1,
 FechaRegistro datetime default getdate()
 )
 GO
+
+
 
 CREATE TABLE CLIENTE(
 IdCliente int primary key identity,
@@ -90,12 +92,14 @@ FechaRegistro datetime default getdate()
 GO
 
 CREATE TABLE DEPARTAMENTO(
+IdDepto INT PRIMARY KEY IDENTITY,
 IdDepartamento varchar (2) not null,
 Descripcion varchar (45) not null
 )
 GO
 
 CREATE TABLE MUNICIPIO(
+IdMun INT PRIMARY KEY IDENTITY,
 IdMunicipio varchar (4) NOT NULL,
 Descripcion varchar (45) NOT NULL,
 IdDepartamento varchar (2) NOT NULL
@@ -103,9 +107,33 @@ IdDepartamento varchar (2) NOT NULL
 GO
 
 CREATE TABLE ALDEA(
+IdDistrito INT PRIMARY KEY IDENTITY,
 IdAldea varchar (6) NOT NULL,
 Descripcion varchar (45) NOT NULL,
 IdMunicipio varchar (4) NOT NULL,
 IdDepartamento varchar (2) NOT NULL
+)
+GO
+
+CREATE TYPE [dbo].[EDetalle_Venta] AS TABLE(
+	[IdProducto] int null,
+	[Cantidad] int null,
+	[Total] decimal(18,2) null
+)
+GO
+
+
+CREATE TABLE Negocio(
+IdNegocio int primary key,
+Documento varchar (100),
+RazonSocial varchar (100),
+Correo varchar (100),
+Direccion varchar (500),
+Telefono varchar (100),
+UserTelegram varchar (100),
+Mision varchar (1000),
+Vision varchar (1000),
+RutaImagen varchar(700),
+NombreImagen varchar(100)
 )
 GO

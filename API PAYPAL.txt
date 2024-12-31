@@ -1,0 +1,38 @@
+Client ID
+AU9mmEri6lW5M224CrkEEGJBzMylFofJGnAM3e00XdVpVrYa1t00WU8gZ3IFMVN8bqHPj_-Zxz_Mg9wG
+
+Secret key 1
+EFQKvMt44wQ5LkzrnOO3th-FNf-UbiK0Lxx4SbqR-B7kxHzSYHMqbcU02wm5tuZTj0t4VdaLN4BuXJ1E
+
+TIENDA
+correo: sb-43kwoz35139512@business.example.com
+Contraseña: g-6I9LQy
+
+CLIENTE
+Correo: sb-ncj3g35120752@personal.example.com
+Contraseña: }y^2eR#k
+
+Detalles de la tarjeta de crédito generada
+
+Número de tarjeta: 4032035412131930
+Fecha de caducidad: 07/2025
+Código CVC: 274
+
+API
+https://api-m.sandbox.paypal.com
+https://api-m.sandbox.paypal.com/v2/checkout/orders
+
+https://localhost:44328/Tienda/Carrito
+
+54G71499PY067194A /temporal
+
+//Firebase
+advancedengineeringtechnology@gmail.com
+Codigo123
+
+scorpiongroup-6c76e.appspot.com
+
+API: AIzaSyBKvzruXsrDT3YayLyKkZW7uUHfv3gBFSE
+
+
+Crear próximamente: Modulo de Depto, muni, aldea, y editar cliente por los momentos

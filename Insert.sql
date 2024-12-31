@@ -13,7 +13,12 @@ go
 Insert into DEPARTAMENTO (IdDepartamento,Descripcion) VALUES
 ('01','Atlantida'),
 ('02','Colón'),
-('03','Comayagua')
+('03','Comayagua'),
+('04','Copán'),
+('05','Cortes'),
+('06','Choluteca'),
+('07','El Paraíso'),
+('08','Francisco Morazan')
 GO
 
 Insert into MUNICIPIO (IdMunicipio,Descripcion,IdDepartamento) values
